@@ -1,0 +1,342 @@
+Create DATABASE Inmobiliario;
+Use Inmobiliario;
+
+Create Table Propiedades (
+    IdPropiedad int primary key auto_increment,
+    Direccion varchar(150) not null,
+    Ciudad varchar(100) not null,
+    Precio varchar(50) not null,
+    Tipo varchar(50) not null
+);
+
+Create Table Clientes (
+    IdCliente int primary key auto_increment,
+    Nombre varchar(100) not null,
+    Apellido varchar(100) not null,
+    Email varchar(100) not null,
+    Telefono varchar(15) not null
+);
+
+Create Table Agentes (
+    IdAgente int primary key auto_increment,
+    Nombre varchar(100) not null,
+    Apellido varchar(100) not null,
+    Email varchar(100) not null,
+    Telefono varchar(15) not null
+);
+
+Create Table Transacciones (
+    IdTransaccion int primary key auto_increment,
+    Fecha date not null,
+    PrecioTotal varchar(50) not null,
+    IdPropiedad int,
+    IdCliente int,
+    IdAgente int,
+    foreign key (IdPropiedad) references Propiedades(IdPropiedad),
+    foreign key (IdCliente) references Clientes(IdCliente),
+    foreign key (IdAgente) references Agentes(IdAgente)
+);
+
+Insert into Propiedades (Direccion, Ciudad, Precio, Tipo) values
+('25 de Mayo 250', 'San Miguel de Tucuman', 10000000, 'Casa'),
+('Republica del Libano 1054', 'Tafi Viejo', 500000, 'Departamento'),
+('Brigido Teran 846', 'San Pedro de Colalao', 20000000, 'Departamento'),
+('San Martin 1348', 'Burruyacu', 2500000, 'Casa'),
+('Laprida 543', 'Famailla', 3000000, 'Casa');
+
+Insert into Clientes (Nombre, Apellido, Email, Telefono) values
+('Juan', 'Perez', 'juan.perez@example.com', '123456789'),
+('Maria', 'Gomez', 'maria.gomez@example.com', '987654321'),
+('Carlos', 'Lopez', 'carlos.lopez@example.com', '123123123'),
+('Ana', 'Martinez', 'ana.martinez@example.com', '321321321'),
+('Luis', 'Garcia', 'luis.garcia@example.com', '456456456');
+
+Insert into Agentes (Nombre, Apellido, Email, Telefono) values
+('Federico', 'Diaz', 'federico.diaz@example.com', '3814567812'),
+('Pepita', 'Lolita', 'pepitadiaz@example.com', '3811237498'),
+('Corriente', 'Mendoza', 'corriente@example.com', '381789134'),
+('Sicario', 'Roaming', 'sicario@example.com', '3814567891'),
+('Marta', 'Powell', 'martapow@example.com', '3811234564');
+
+Insert into Transacciones (Fecha, PrecioTotal, IdPropiedad, IdCliente, IdAgente) values
+('2024-06-01', 1050000, 1, 1, 1),
+('2024-06-15', 1500000, 2, 2, 1),
+('2024-06-20', 2000000, 3, 3, 2),
+('2024-05-10', 2500000, 4, 4, 3),
+('2024-04-25', 3000000, 5, 5, 4);
+
+
+Create Table Pacientes (
+    IdPaciente int primary key,
+    Nombre varchar(50),
+    Apellido varchar(50),
+    Edad int,
+    Dirección varchar(100)
+);
+
+Create Table Medicos (
+    IdMedico int primary key,
+    Nombre varchar(50),
+    Apellido varchar(50),
+    Especialidad varchar(50),
+    Teléfono varchar(20)
+);
+
+Create Table Admisionistas (
+    IdAdmisionista int primary key,
+    Nombre varchar(50),
+    Apellido varchar(50),
+    Turno_Trabajo varchar(50),
+    Teléfono varchar(20)
+);
+
+Create Table Turnos (
+    IdTurno int primary key,
+    Fecha date,
+    Hora time,
+    IdPaciente int,
+    IdMedico int,
+    IdAdmisionista int,
+    Foreign key (IdPaciente) references Pacientes(IdPaciente),
+    Foreign key (IdMedico) references Medicos(IdMedico),
+    Foreign key (IdAdmisionista) references Admisionistas(IdAdmisionista)
+);
+
+Create Table Tratamientos (
+    IdTratamiento int primary key,
+    Descripción varchar(100),
+    IdTurno int,
+    Foreign key (IdTurno) references Turnos(IdTurno)
+);
+
+Create Table Estudios (
+    IdEstudio int primary key,
+    Tipo varchar(50),
+    Resultado varchar(100),
+    IdTurno int,
+    Foreign key (IdTurno) references Turnos(IdTurno)
+);
+
+Insert into Pacientes (IdPaciente, Nombre, Apellido, Edad, Dirección) values
+(1, 'Pepito', 'Perez', 68, 'Cisneros 345'),
+(2, 'Maria', 'Marianes', 58, 'Av. Colega 247'),
+(3, 'Lucio', 'Merezno', 14, 'Moreno 123'),
+(4, 'Pedro', 'Montesori', 48, 'Av. Libertadores 3750'),
+(5, 'Charles', 'Mansoon', 75, 'Berisso 111');
+
+
+Insert into Medicos (IdMedico, Nombre, Apellido, Especialidad, Teléfono) values
+(1, 'Ricardo', 'De la Torre', 'Cardiología', '3811234567'),
+(2, 'Loreta', 'Cabezona', 'Neurología', '3811248564'),
+(3, 'Sergio', 'Tocaninios', 'Pediatría', '3811297563'),
+(4, 'Jorge', 'Nitales', 'Urologo', '3811744562'),
+(5, 'Pedro', 'Manoinquieta', 'Ginecología', '3811934561');
+
+
+Insert into Admisionistas (IdAdmisionista, Nombre, Apellido, Turno_Trabajo, Teléfono) values
+(1, 'Coloquio', 'Tirado', 'Mañana', '111-2468'),
+(2, 'Luna', 'Petrelli', 'Tarde', '111-3579'),
+(3, 'Gumersindo', 'Politti', 'Noche', '111-4680'),
+(4, 'Vanesa', 'Kilos', 'Mañana', '111-5791'),
+(5, 'Teresa', 'Verdeos', 'Tarde', '111-6802');
+
+
+Insert into Turnos (IdTurno, Fecha, Hora, IdPaciente, IdMedico, IdAdmisionista) values
+(1, '2024-05-10', '09:00:00', 1, 1, 1),
+(2, '2024-05-11', '10:00:00', 2, 2, 1),
+(3, '2024-05-12', '11:00:00', 3, 3, 2),
+(4, '2024-05-13', '12:00:00', 4, 4, 3),
+(5, '2024-05-14', '13:00:00', 5, 5, 4);
+
+
+Insert into Tratamientos (IdTratamiento, Descripción, IdTurno) values
+(1, 'Tratamiento A', 1),
+(2, 'Tratamiento B', 2),
+(3, 'Tratamiento C', 3),
+(4, 'Tratamiento D', 4),
+(5, 'Tratamiento E', 5);
+
+Insert into Estudios (IdEstudio, Tipo, Resultado, IdTurno) values
+(1, 'Rayos X', 'Normal', 1),
+(2, 'Tomografía', 'Anomalía detectada', 2),
+(3, 'Ecografía', 'Normal', 3),
+(4, 'Análisis de Sangre', 'Niveles altos de colesterol', 4),
+(5, 'Electrocardiograma', 'Ritmo irregular', 5);
+
+Select count(*) as Total_Turnos
+from Turnos
+where IdAdmisionista = 12 and month(Fecha) = 8 and year(Fecha) = 2024;
+
+Select Pacientes.Nombre, Pacientes.Edad
+From Turnos
+Join Pacientes on Turno.IdPaciente = Pacientes.IdPaciente
+Where Turnos.IdAdmisionista = 12;
+
+Select * 
+From Turnos
+Where month(Fecha) in (6, 7, 8, 9)
+Order by Fecha asc;
+
+Select Pacientes.Nombre, Turnos.IdTurno, Medicos.Nombre as Medico_Nombre
+From Turnos
+Join Pacientes on Turnos.IdPaciente = Pacientes.IdPaciente
+Join Medicos on Turnos.IdMedico = Medicos.IdMedico
+Where month(Fecha) = 5 and year(Fecha) = 2024
+Group by Pacientes.Nombre
+Order by Pacientes.Nombre desc
+Limit 5;
+
+Select Pacientes.Nombre, Estudios.Tipo, Estudios.Resultado
+From Turnos
+Join Pacientes on Turnos.IdPaciente = Pacientes.IdPaciente
+Join Medicos on Turnos.IdMedico = Medicos.IdMedico
+Join Estudios on Turnos.IdTurno = Estudios.IdTurno
+Where Medicos.Apellido = 'De la Torre' and datepart(dw, Fecha) = 5 
+and month(Fecha) = 1 and year(Fecha) = 2023;
+
+Select Pacientes.Nombre, Pacientes.Edad
+From Turnos
+Join Pacientes ON Turnos.IdPaciente = Pacientes.IdPaciente
+Where Turnos.IdAdmisionista = 12;}
+
+Select * 
+From Turnos
+Where month(Fecha) in (6, 7, 8)
+order by Fecha asc, Hora asc;
+
+Select Pacientes.Nombre as Nombre_Paciente, Pacientes.Apellido as Apellido_Paciente, Medicos.Nombre as Nombre_Medico, Medicos.Apellido as Apellido_Medico, Turnos.IdTurno
+From Turnos
+Join Pacientes on Turnos.IdPaciente = Pacientes.IdPaciente
+Join Medicos on Turnos.IdMedico = Medicos.IdMedico
+Where month(Fecha) = 5 and year(Fecha) = 2024
+Order by Pacientes.Nombre desc
+Limit 5;
+
+Select Pacientes.Nombre as Nombre_Paciente, Pacientes.Apellido as Apellido_Paciente, Estudios.Tipo, Estudios.Resultado
+From Turnos
+Join Pacientes on Turnos.IdPaciente = Pacientes.IdPaciente
+Join Medicos on Turnos.IdMedico = Medicos.IdMedico
+Join Estudios on Turnos.IdTurno = Estudios.IdTurno
+Where Medicos.Apellido = 'De la Torre' and Turnos.Fecha = '2023-01-27';
+
+()
+Insert into Turnos (IdTurno, Fecha, Hora, IdPaciente, IdMedico, IdAdmisionista) values
+(1, '2024-08-01', '10:00:00', 1, 1, 12),
+(2, '2024-08-08', '11:00:00', 2, 1, 12),
+(3, '2024-06-15', '09:00:00', 3, 2, 1),
+(4, '2024-07-10', '10:30:00', 4, 3, 2),
+(5, '2024-08-20', '12:00:00', 5, 4, 3),
+(6, '2023-01-27', '13:00:00', 1, 1, 1),
+
+Insert into Transacciones (Fecha, PrecioTotal, IdPropiedad, IdCliente, IdAgente) values
+('2024-06-05', '1500000', 1, 1, 1),
+('2024-06-15', '2000000', 2, 2, 1), 
+('2024-01-10', '3000000', 3, 3, 2), 
+('2024-02-20', '2500000', 4, 4, 3), 
+('2024-03-15', '3500000', 5, 5, 1), 
+('2024-04-10', '4000000', 1, 2, 2),
+('2024-05-25', '5000000', 4, 3, 1), 
+('2024-04-15', '6000000', 5, 1, 1), 
+('2024-04-20', '5500000', 3, 4, 2), 
+('2024-04-25', '7000000', 2, 5, 3); 
+
+Select T.IdTransaccion, T.Fecha, T.PrecioTotal 
+From Transacciones T
+Join Agentes A on T.IdAgente = A.IdAgente
+Where A.Nombre = 'Federico' and A.Apellido = 'Diaz' and month(T.Fecha) = 6 and year(T.Fecha) = 2024
+Order by T.Fecha desc;
+
+Select A.Nombre, A.Apellido, count(T.IdTransaccion) as NumeroDeVentas
+From Transacciones T
+Join Agentes A on T.IdAgente = A.IdAgente
+Where year(T.Fecha) = year(curdate())
+GROUP BY A.IdAgente
+ORDER BY NumeroDeVentas desc
+Limit 1;
+
+Select C.Nombre, C.Apellido, T.PrecioTotal, T.Fecha 
+From Transacciones T
+Join Clientes C on T.IdCliente = C.IdCliente
+Join Propiedades P on T.IdPropiedad = P.IdPropiedad
+Where P.Tipo = 'Casa'
+Order by cast(T.PrecioTotal as decimal(10,2)) desc
+Limit 1;
+
+Select A.Nombre as AgenteNombre, A.Apellido as AgenteApellido 
+From Transacciones T
+Join Agentes A on T.IdAgente = A.IdAgente
+Join Propiedades P on T.IdPropiedad = P.IdPropiedad
+Where P.Tipo = 'Casa'
+Order by cast(T.PrecioTotal as decimal(10,2)) desc
+Limit 1;
+
+Select P.Direccion as Propiedad, A.Nombre as AgenteNombre, A.Apellido as AgenteApellido, C.Nombre as ClienteNombre, C.Apellido as ClienteApellido, T.PrecioTotal, T.Fecha 
+From Transacciones T
+Join Propiedades P on T.IdPropiedad = P.IdPropiedad
+Join Agentes A on T.IdAgente = A.IdAgente
+Join Clientes C on T.IdCliente = C.IdCliente
+Where T.Fecha >= date_sub(curdate(), interval 1 month)
+Order by cast(T.PrecioTotal as decimal(10,2)) desc
+Limit 3;
+
+Hospital1
+
+Insert into Pacientes (IdPaciente, Nombre, Apellido, Edad, Dirección) values
+(1, 'Juan', 'Pérez', 45, 'Calle Falsa 123'),
+(2, 'Ana', 'García', 34, 'Avenida Siempreviva 742'),
+(3, 'Luis', 'Martínez', 50, 'Boulevard de los Sueños 1');
+
+Insert into Medicos (IdMedico, Nombre, Apellido, Especialidad, Teléfono) values
+(1, 'Carlos', 'De la Torre', 'Cardiología', '555-1234'),
+(2, 'María', 'López', 'Neurología', '555-5678');
+
+Insert into Admisionistas (IdAdmisionista, Nombre, Apellido, Turno_Trabajo, Teléfono) values
+(12, 'Lucía', 'Fernández', 'Mañana', '555-4321'),
+(13, 'Pedro', 'Ramírez', 'Tarde', '555-8765');
+
+Insert into Turnos (IdTurno, Fecha, Hora, IdPaciente, IdMedico, IdAdmisionista) values
+(1, '2024-08-01', '08:00:00', 1, 1, 12),
+(2, '2024-08-15', '10:00:00', 2, 1, 12),
+(3, '2024-05-10', '09:00:00', 3, 2, 13),
+(4, '2023-01-27', '15:00:00', 1, 1, 12);
+
+Insert into Tratamientos (IdTratamiento, Descripción, IdTurno) values
+(1, 'Tratamiento A', 1),
+(2, 'Tratamiento B', 2),
+(3, 'Tratamiento C', 3);
+
+Insert into Estudios (IdEstudio, Tipo, Resultado, IdTurno) values
+(1, 'Radiografía', 'Normal', 1),
+(2, 'Análisis de Sangre', 'Alterado', 2),
+(3, 'Electrocardiograma', 'Normal', 4);
+
+Select count(*) as TotalTurnos
+From Turnos
+Where IdAdmisionista = 12
+And Fecha between '2024-08-01' and '2024-08-31';
+
+Select Pacientes.Nombre, Pacientes.Edad
+From Turnos
+Join Pacientes on Turnos.IdPaciente = Pacientes.IdPaciente
+Where Turnos.IdAdmisionista = 12;
+
+Select *
+From Turnos
+Where month(Fecha) in (6, 7, 8)
+Order by Fecha asc;
+
+Select Pacientes.Nombre, Medicos.Nombre as NombreMedico, Medicos.Apellido as ApellidoMedico, Turnos.IdTurno
+From Turnos
+Join Pacientes on Turnos.IdPaciente = Pacientes.IdPaciente
+Join Medicos on Turnos.IdMedico = Medicos.IdMedico
+Where month(Turnos.Fecha) = 5 and year(Turnos.Fecha) = 2024
+Group by Pacientes.Nombre, Turnos.IdTurno
+Order by Pacientes.Nombre DESC
+Limit 5;
+
+Select Pacientes.Nombre, Estudios.Tipo, Estudios.Resultado
+From Turnos
+Join Pacientes on Turnos.IdPaciente = Pacientes.IdPaciente
+Join Medicos on Turnos.IdMedico = Medicos.IdMedico
+Join Estudios on Turnos.IdTurno = Estudios.IdTurno
+Where Medicos.Apellido = 'De la Torre' and Turnos.Fecha = '2023-01-27';
