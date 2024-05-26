@@ -1,0 +1,19 @@
+footer {
+    background-color: #282c34;
+    padding: 1rem;
+    color: white;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+  
+  .social-links a {
+    color: white;
+    margin: 0 0.5rem;
+    text-decoration: none;
+  }
+  
+  .social-links a:hover {
+    text-decoration: underline;
+  }
