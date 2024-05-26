@@ -1,8 +1,8 @@
-const Body = ({ hijos }) => {
+const Main = ({ hijos }) => {
   return (
     <main>
       {hijos}
     </main>
   );
 };
-export default Body;
+export default Main;

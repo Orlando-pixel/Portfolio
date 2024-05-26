@@ -1,9 +1,14 @@
+import Header from "../components/header";
+import Main from "../components/main";
+import Footer from "../components/footer";
+
 const Home = () => {
   return (
-    <div>
-      <h2>Bienvenidxs a mi Portfolio</h2>
-      <p>Esta es la pagina principal pue.</p>
-    </div>
+    <>
+    <Header>Hola</Header>
+    <Main/>
+    <Footer/>
+    </>
   );
 };
 export default Home;
