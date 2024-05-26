@@ -1,25 +1,46 @@
 .header-content {
     display: flex;
     flex-direction: column;
+    padding: 0.02rem;
     align-items: center;
+    text-align: center;
   }
   
   .header-photo {
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     margin-bottom: 1rem;
   }
   
   header {
-    background-color: #282c34;
+    background-color: #eeac31;
     padding: 1rem;
-    color: white;
-    text-align: center;
+    color: rgb(0, 0, 0);
+  }
+  
+  nav {
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+    padding: 0.50rem;
   }
   
   nav a {
-    color: white;
-    margin: 0 1rem;
+    color: rgb(0, 0, 0);
+    margin: 0.5rem;
     text-decoration: none;
   }
+  
+  @media (min-width: 600px) {
+    .header-content {
+      flex-direction: row;
+      align-items: center;
+      text-align: left;
+    }
+  
+    .header-photo {
+      margin-right: 1rem;
+    }
+  } 
+

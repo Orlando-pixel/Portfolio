@@ -1,15 +1,14 @@
 footer {
-    background-color: #282c34;
+    background-color: #eeac31;
     padding: 1rem;
-    color: white;
+    color: rgb(2, 0, 0);
     text-align: center;
-    position: absolute;
     bottom: 0;
     width: 100%;
   }
   
   .social-links a {
-    color: white;
+    color: rgb(0, 0, 0);
     margin: 0 0.5rem;
     text-decoration: none;
   }
